@@ -1,0 +1,41 @@
+{
+  "name": "pritam",
+  "samples": [
+    "voice_profiles\\pritam\\samples\\sample_001.wav",
+    "voice_profiles\\pritam\\samples\\sample_002.wav",
+    "voice_profiles\\pritam\\samples\\sample_003.wav",
+    "voice_profiles\\pritam\\samples\\sample_004.wav",
+    "voice_profiles\\pritam\\samples\\sample_005.wav",
+    "voice_profiles\\pritam\\samples\\sample_006.wav",
+    "voice_profiles\\pritam\\samples\\sample_007.wav",
+    "voice_profiles\\pritam\\samples\\sample_008.wav",
+    "voice_profiles\\pritam\\samples\\sample_009.wav",
+    "voice_profiles\\pritam\\samples\\sample_010.wav",
+    "voice_profiles\\pritam\\samples\\sample_011.wav",
+    "voice_profiles\\pritam\\samples\\sample_012.wav",
+    "voice_profiles\\pritam\\samples\\sample_013.wav",
+    "voice_profiles\\pritam\\samples\\sample_014.wav",
+    "voice_profiles\\pritam\\samples\\sample_015.wav",
+    "voice_profiles\\pritam\\samples\\sample_016.wav",
+    "voice_profiles\\pritam\\samples\\sample_017.wav",
+    "voice_profiles\\pritam\\samples\\sample_018.wav",
+    "voice_profiles\\pritam\\samples\\sample_019.wav",
+    "voice_profiles\\pritam\\samples\\sample_020.wav",
+    "voice_profiles\\pritam\\samples\\sample_021.wav",
+    "voice_profiles\\pritam\\samples\\sample_022.wav",
+    "voice_profiles\\pritam\\samples\\sample_023.wav",
+    "voice_profiles\\pritam\\samples\\sample_024.wav",
+    "voice_profiles\\pritam\\samples\\sample_025.wav",
+    "voice_profiles\\pritam\\samples\\sample_026.wav",
+    "voice_profiles\\pritam\\samples\\sample_027.wav",
+    "voice_profiles\\pritam\\samples\\sample_028.wav",
+    "voice_profiles\\pritam\\samples\\sample_029.wav",
+    "voice_profiles\\pritam\\samples\\sample_030.wav"
+  ],
+  "languages": [
+    "hi",
+    "en"
+  ],
+  "created_at": "2025-12-29T21:04:32.254775",
+  "updated_at": "2025-12-30T17:12:15.066386"
+}

@@ -1,0 +1,51 @@
+{
+  "mean_similarity": 0.9783282976544098,
+  "std_similarity": 0.02385465675340703,
+  "best_samples": [
+    "sample_012.wav",
+    "sample_017.wav",
+    "sample_001.wav",
+    "sample_002.wav",
+    "sample_020.wav"
+  ],
+  "outlier_samples": [
+    "sample_003.wav",
+    "sample_029.wav",
+    "sample_016.wav",
+    "sample_030.wav",
+    "sample_025.wav"
+  ],
+  "recommended_single_sample": "sample_012.wav",
+  "sample_similarities": {
+    "sample_001.wav": 0.9544224227319573,
+    "sample_002.wav": 0.9544224227319573,
+    "sample_003.wav": 0.933809485832766,
+    "sample_004.wav": 0.9487318891811383,
+    "sample_005.wav": 0.9515259708045105,
+    "sample_006.wav": 0.9479770989924715,
+    "sample_007.wav": 0.9522727309780541,
+    "sample_008.wav": 0.951587192768026,
+    "sample_009.wav": 0.9508317311286895,
+    "sample_010.wav": 0.9523087973452081,
+    "sample_011.wav": 0.9532774306738975,
+    "sample_012.wav": 0.9546039586450701,
+    "sample_013.wav": 0.9535573283918465,
+    "sample_014.wav": 0.9521420572425253,
+    "sample_015.wav": 0.9499185033126711,
+    "sample_016.wav": 0.9245613393538819,
+    "sample_017.wav": 0.9545822692449267,
+    "sample_018.wav": 0.9531465424353767,
+    "sample_019.wav": 0.9532381496396419,
+    "sample_020.wav": 0.9539201347443131,
+    "sample_021.wav": 0.9412135770675972,
+    "sample_022.wav": 0.9348606543708089,
+    "sample_023.wav": 0.9538219279930955,
+    "sample_024.wav": 0.9504071280720866,
+    "sample_025.wav": 0.907346046863428,
+    "sample_026.wav": 0.9518602275216778,
+    "sample_027.wav": 0.9518602275216778,
+    "sample_028.wav": 0.9421623523588205,
+    "sample_029.wav": 0.9297930443139683,
+    "sample_030.wav": 0.9073579995840194
+  }
+}
