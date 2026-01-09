@@ -1,93 +1,88 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual Environment
-venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
-# PyCharm
-.idea/
-
-# VS Code (except instructions)
-.vscode/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Model caches and large files - EXCLUDE FROM GIT
+﻿# Large Model Files and Caches
 models_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Audio Output Files
+audio_output/*.wav
+audio_output/*.mp3
+*.wav
+*.mp3
+*.flac
+!demo_samples/*.wav
+
+# Voice Profiles (contains personal data)
+voice_profiles/*/samples/
+voice_profiles/*/samples_enhanced/
+voice_profiles/*/embedding.pt
+!voice_profiles/README.md
+
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+.conda/
+
+# IDE Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Large Cache Directories
 pip_cache/
+chatterbox/__pycache__/
+chatterbox/src/**/__pycache__/
+vibevoice/**/__pycache__/
+
+# Backup Files
+*.backup
+*.bak
+myvoiceclone.py.backup
+
+# Reference Videos/Images (large files)
+videos/
+references/
+
+# Git submodules
+chatterbox/.git/
+vibevoice/.git/
+
+# Model files (too large for git)
 *.pth
 *.safetensors
 *.bin
+*.ckpt
 
-# Audio files (too large for git)
-audio_output/*.wav
-audio_output/*.mp3
-audio/*.wav
-audio/*.mp3
-auido/*.wav
-auido/*.mp3
-videos/*.mp4
-videos/*.avi
+# Dataset files
+datasets/
 
-# Keep example files
-!audio/example*.wav
-!audio_output/example*.wav
-
-# Voice profiles (may contain personal data)
-voice_profiles/*/samples/*.wav
-voice_profiles/*/samples_enhanced/*.wav
-voice_profiles/*/*.pt
-
-# Datasets
-datasets/**/*.wav
-datasets/**/*.mp3
-datasets/**/*.flac
-
-# Temporary files
-*.log
-*.tmp
-*.temp
-.DS_Store
-Thumbs.db
-
-# Backup files
-*.backup
-*.bak
-*~
-
-# Environment variables
-.env
-.env.local
-
-# HuggingFace cache
-.cache/
-transformers_cache/
-huggingface/
-
-# Ignore vscode AI rules
-.github\instructions\codacy.instructions.md
+# Audio cache
+auido/
+audio/

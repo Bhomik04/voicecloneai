@@ -1,276 +1,478 @@
-# 🎙️ VoiceCloneAI - Advanced Voice Cloning System
+# 🎙️ VoiceCloneAI - Ultimate Voice Cloning System
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+<div align="center">
 
-An advanced, production-ready voice cloning system featuring emotional TTS, multi-language support, studio-quality audio processing, and real-time voice conversion. Built on top of state-of-the-art models including Chatterbox-Turbo and F5-TTS.
+![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0-orange.svg)
+![CUDA](https://img.shields.io/badge/CUDA-12.6-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen.svg)
 
-## ✨ Key Features
+**Professional-grade voice cloning with multi-engine support, Hindi/English TTS, and studio-quality audio enhancement**
 
-### 🎯 Core Capabilities
-- **Multi-Emotion Voice Cloning**: Generate speech with various emotions (excited, calm, dramatic, conversational)
-- **Bilingual Support**: Clone voices in both English and Hindi
-- **Long-Form Generation**: Create extended audio (1+ minutes) with perfect quality
-- **Studio-Quality Processing**: Professional audio enhancement and artifact removal
-- **Real-Time Voice Conversion**: Convert your voice to the cloned voice in real-time
-- **Zero-Shot Cloning**: Clone any voice with just a few seconds of audio
+[Features](#-features) • [Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Demo](#-demo)
 
-### 🔧 Advanced Features
-- **Intelligent Audio Chunking**: Smart text segmentation with smooth crossfade transitions
-- **Prosody Control**: Fine-tune pitch, speed, and rhythm for natural-sounding speech
-- **Emotion Analysis**: Automatic detection and replication of emotional characteristics
-- **Voice Similarity Analysis**: Measure and optimize voice similarity scores
-- **Audio Enhancement Pipeline**: Multi-stage processing including noise reduction, normalization, and artifact removal
-- **Profile Management**: Save and reuse voice profiles with metadata
+</div>
 
-### 🎨 User Interface
-- **Gradio Web Interface**: Easy-to-use web UI for voice cloning
-- **Multiple TTS Modes**: Standard TTS, Turbo TTS, and Voice Conversion
-- **Batch Processing**: Generate multiple outputs efficiently
-- **Real-Time Preview**: Listen to samples before final generation
+---
 
-## 🚀 Quick Start
+## 🌟 Overview
+
+VoiceCloneAI is a state-of-the-art voice cloning system that combines multiple TTS engines with advanced audio processing to deliver broadcast-quality voice synthesis. Built for both English and Hindi languages, it features emotion-aware generation, prosody enhancement, and professional audio post-processing.
+
+### Why VoiceCloneAI?
+
+- 🎯 **Multi-Engine Architecture**: Chatterbox TTS + VibeVoice-Hindi-7B support
+- 🌍 **True Multilingual**: Native English, Hindi, and Hinglish support
+- 🎭 **Emotion-Aware**: 8 emotion presets with intelligent auto-detection
+- 🎚️ **Studio Quality**: Professional audio enhancement pipeline
+- 🇮🇳 **Hindi Prosody Fix**: Authentic Hindi accent with natural pitch patterns
+- 💻 **Production Ready**: Web UI + CLI + Python API
+- ⚡ **GPU Accelerated**: Optimized for NVIDIA GPUs (4GB+ VRAM)
+
+---
+
+## ✨ Features
+
+### 🎤 Voice Cloning
+- **Few-Shot Learning**: Clone any voice with 10-30 seconds of audio
+- **Voice Profiles**: Save and reuse voice embeddings
+- **Reference Audio**: Automatic sample selection from profile directories
+- **Cross-Lingual**: Clone voices across English and Hindi
+
+### 🗣️ Text-to-Speech Engines
+
+#### Chatterbox TTS (Primary)
+- **English Generation**: High-quality neural TTS
+- **Multilingual Mode**: Hindi and Hinglish support
+- **Emotion Presets**: conversational, excited, serious, professional, friendly, warm, dramatic, news_anchor
+- **Real-time Capable**: Fast inference with FP16 support
+
+#### VibeVoice-Hindi-7B (Optional)
+- **7B Parameters**: Qwen2.5-7B backbone + 600M diffusion head
+- **Native Hindi**: Specialized for authentic Hindi speech
+- **Long-Form**: Up to 32K tokens (~45 minutes)
+- **Zero-Shot**: Works with minimal reference audio
+
+### 🎨 Audio Enhancement Pipeline
+
+#### Phase 1: Studio Quality Processing
+- **Adobe Podcast Enhancer**: Professional noise reduction
+- **Studio Audio Processor**: Broadcast-quality EQ and dynamics
+- **Spectral Denoising**: Advanced noise removal
+- **Dynamic Range Control**: Consistent audio levels
+
+#### Phase 2: Prosody & Naturalness
+- **Hindi Prosody Enhancer** ⭐ **NEW**
+  - Phrase-final pitch drops (~4 semitones)
+  - Authentic Hindi intonation patterns
+  - Micro-pitch variations for natural quality
+  - Syllable-timed rhythm correction
+  - Fixes "foreigner accent" problem in Hindi TTS
+
+- **Emotion Analyzer**: Rule-based emotion detection
+- **Prosody Processor**: Natural pauses and breath points
+- **Word Emphasis**: Intelligent stress placement
+
+### 🎮 Interfaces
+
+#### Web UI (Gradio)
+```bash
+python myvoiceclone.py
+# Access at http://localhost:7860
+```
+- Intuitive interface
+- Real-time generation
+- Audio playback and download
+- Profile management
+
+#### CLI Mode
+```bash
+python myvoiceclone.py --cli
+```
+- Quick generation from terminal
+- Batch processing capable
+- Script automation support
+
+#### Python API
+```python
+from tts_compatibility import UnifiedTTS
+
+tts = UnifiedTTS()
+audio = tts.generate(
+    text="Hello world!",
+    profile="my_voice",
+    emotion="conversational"
+)
+audio.save("output.wav")
+```
+
+---
+
+## 🚀 Installation
 
 ### Prerequisites
-
-- Python 3.11 or higher
-- NVIDIA GPU with 4GB+ VRAM (tested on T2000 4GB)
-- 32GB RAM recommended
+- Python 3.9-3.12
+- NVIDIA GPU with 4GB+ VRAM (recommended)
+- CUDA 11.8+ / ROCm 5.6+
 - Windows/Linux/macOS
 
-### Installation
-
-1. **Clone the repository**
+### Step 1: Clone Repository
 ```bash
-git clone https://github.com/pritam-ray/voicecloneai.git
+git clone https://github.com/Bhomik04/voicecloneai.git
 cd voicecloneai
 ```
 
-2. **Install dependencies**
+### Step 2: Install Dependencies
 ```bash
+# Create virtual environment (recommended)
+conda create -n voiceclone python=3.12
+conda activate voiceclone
+
+# Install PyTorch with CUDA support
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+# Install requirements
 pip install -r requirements.txt
-```
 
-3. **Configure model paths** (for Windows users with D: drive)
-```bash
-set_model_paths.bat
-```
-
-4. **Download required models** (automatic on first run)
-```bash
-python myvoiceclone.py
-```
-
-### Basic Usage
-
-#### Option 1: Web Interface (Recommended)
-```bash
-python myvoiceclone.py
-```
-Then open your browser to `http://localhost:7860`
-
-#### Option 2: Quick Start Script
-```bash
-python phase3_quickstart.py
-```
-
-#### Option 3: Chatterbox Models
-```bash
+# Install Chatterbox TTS
 cd chatterbox
-python gradio_tts_app.py        # Standard TTS
-python gradio_tts_turbo_app.py  # Turbo TTS (faster)
-python gradio_vc_app.py         # Voice Conversion
+pip install -e .
+cd ..
 ```
+
+### Step 3: Download Models
+
+Models will auto-download on first run, or you can pre-download:
+
+```bash
+# Chatterbox models (auto-downloads to models_cache/)
+python -c "from chatterbox.tts import ChatterboxTTS; ChatterboxTTS.from_pretrained()"
+
+# Optional: VibeVoice-Hindi-7B (~30GB)
+python -c "
+from huggingface_hub import snapshot_download
+snapshot_download('tarun7r/vibevoice-hindi-7b', 
+                  local_dir='models_cache/vibevoice-hindi-7b')
+"
+```
+
+### Step 4: Verify Installation
+```bash
+python myvoiceclone.py --help
+```
+
+---
+
+## 🎯 Quick Start
+
+### 1. Create a Voice Profile
+
+Place 10-30 seconds of clean audio samples in `voice_profiles/your_name/samples/`:
+
+```bash
+voice_profiles/
+└── john_doe/
+    ├── samples/
+    │   ├── sample_001.wav
+    │   ├── sample_002.wav
+    │   └── sample_003.wav
+    └── metadata.json
+```
+
+**Audio Requirements:**
+- Format: WAV, MP3, or FLAC
+- Sample Rate: 16kHz or higher
+- Duration: 3-10 seconds per sample
+- Quality: Clear speech, minimal background noise
+- Total: 10-30 seconds across all samples
+
+### 2. Generate Speech
+
+#### Using Web UI:
+```bash
+python myvoiceclone.py
+```
+1. Select voice profile
+2. Enter text
+3. Choose emotion
+4. Click Generate
+5. Download output
+
+#### Using CLI:
+```bash
+python myvoiceclone.py --cli
+
+# Follow prompts:
+# Profile: john_doe
+# Text: Hello, this is a test.
+# Emotion: conversational
+```
+
+#### Using Python API:
+```python
+from tts_compatibility import UnifiedTTS
+
+tts = UnifiedTTS()
+result = tts.generate(
+    text="नमस्ते, आप कैसे हैं?",  # Hindi text
+    profile="john_doe",
+    emotion="friendly"
+)
+result.save("output.wav")
+print(f"Duration: {result.duration}s, RTF: {result.rtf}x")
+```
+
+### 3. Hindi Generation with Enhanced Prosody
+
+```python
+# Automatic Hindi prosody enhancement
+result = tts.generate(
+    text="मेरा नाम जॉन है। मैं भारत से हूं।",
+    profile="john_doe",
+    language="hi-IN"  # Forces Hindi mode
+)
+result.save("hindi_output.wav")
+```
+
+The Hindi Prosody Enhancer automatically:
+- ✅ Adds phrase-final pitch drops
+- ✅ Applies authentic Hindi intonation
+- ✅ Adjusts rhythm to syllable-timing
+- ✅ Adds micro-variations for naturalness
+
+---
 
 ## 📖 Documentation
 
-### Core Modules
+### Emotion Presets
 
-| Module | Description | File |
-|--------|-------------|------|
-| **Voice Cloning** | Main voice cloning interface | `myvoiceclone.py` |
-| **Enhanced Cloning** | Advanced features with emotion control | `enhanced_voice_clone.py` |
-| **Audio Processing** | Professional audio enhancement | `studio_audio_processor.py` |
-| **F5 Engine** | F5-TTS integration | `f5_engine.py` |
-| **Emotion Analysis** | Emotional characteristic detection | `emotion_analyzer.py` |
-| **Voice Analysis** | Similarity scoring and optimization | `voice_similarity_analyzer.py` |
+| Emotion | Use Case | Characteristics |
+|---------|----------|-----------------|
+| `conversational` | Default, chat | Natural, friendly tone |
+| `excited` | Announcements | High energy, enthusiastic |
+| `serious` | Professional | Authoritative, formal |
+| `professional` | Business | Clear, confident |
+| `friendly` | Casual | Warm, approachable |
+| `warm` | Personal | Gentle, caring |
+| `dramatic` | Storytelling | Expressive, theatrical |
+| `news_anchor` | Broadcasting | Clear, measured |
 
-### Guides
+### Configuration
 
-- 📘 [Complete Fix Guide](COMPLETE_FIX_GUIDE.md) - Comprehensive troubleshooting
-- 🎯 [Enhanced Voice Guide](ENHANCED_VOICE_GUIDE.md) - Advanced features walkthrough
-- 🎨 [Studio Quality Guide](STUDIO_QUALITY_GUIDE.md) - Professional audio processing
-- 🔧 [Profile System Guide](PROFILE_SYSTEM_GUIDE.md) - Voice profile management
-- ⚡ [Quick Start Enhanced](QUICK_START_ENHANCED.md) - Fast setup guide
+Edit `model_paths.py` to customize cache locations:
 
-## 🎯 Use Cases
-
-### 1. Voice Cloning
-Clone your voice or any reference voice with just 10-15 seconds of audio:
 ```python
-from myvoiceclone import VoiceCloner
+MODEL_CACHE_ROOT = "D:/your_path/models_cache"  # Model storage
+HF_HOME = f"{MODEL_CACHE_ROOT}/huggingface"     # Hugging Face cache
+TORCH_HOME = f"{MODEL_CACHE_ROOT}/torch"        # PyTorch models
+```
 
-cloner = VoiceCloner()
-cloner.create_profile(
-    name="my_voice",
-    samples_dir="path/to/samples",
-    emotions=["neutral", "excited", "calm"]
+### Advanced Usage
+
+#### Batch Processing
+```python
+texts = ["Hello world", "नमस्ते दुनिया", "Testing voice"]
+for i, text in enumerate(texts):
+    result = tts.generate(text, profile="john_doe")
+    result.save(f"output_{i}.wav")
+```
+
+#### Custom Enhancement Settings
+```python
+from hindi_prosody_enhancer import HindiProsodyEnhancer
+
+enhancer = HindiProsodyEnhancer()
+enhanced_audio = enhancer.enhance(
+    audio_array, 
+    sample_rate,
+    intensity=1.0  # 0.0-1.5, higher = stronger effect
 )
 ```
 
-### 2. Text-to-Speech Generation
+#### Voice Profile Management
 ```python
-output = cloner.generate_speech(
-    text="Hello! This is my cloned voice.",
-    emotion="excited",
-    language="en"
-)
+from tts_compatibility import VoiceProfileManager
+
+manager = VoiceProfileManager()
+profiles = manager.list_profiles()
+profile = manager.get_profile("john_doe")
+best_ref = manager.get_best_reference("john_doe")
 ```
 
-### 3. Long-Form Content
-```python
-output = cloner.generate_long_form(
-    text=long_script,
-    chunk_size=200,
-    crossfade_duration=0.5
-)
-```
+---
 
-### 4. Voice Conversion
-```python
-converted = cloner.convert_voice(
-    source_audio="my_recording.wav",
-    target_voice="profile_name"
-)
-```
-
-## 🏗️ Project Structure
+## 🏗️ Architecture
 
 ```
-voicecloneai/
-├── myvoiceclone.py              # Main voice cloning system
-├── enhanced_voice_clone.py       # Enhanced features
-├── f5_engine.py                  # F5-TTS engine
-├── studio_audio_processor.py     # Audio enhancement
-├── emotion_analyzer.py           # Emotion detection
-├── voice_similarity_analyzer.py  # Similarity analysis
-├── prosody_processor.py          # Prosody control
-├── dataset_manager.py            # Dataset management
-├── model_paths.py                # Model configuration
-├── chatterbox/                   # Chatterbox TTS integration
-│   ├── gradio_tts_app.py        # Standard TTS interface
-│   ├── gradio_tts_turbo_app.py  # Turbo TTS interface
-│   ├── gradio_vc_app.py         # Voice conversion interface
-│   └── src/chatterbox/          # Core Chatterbox modules
-├── audio/                        # Input audio samples
-├── audio_output/                 # Generated audio outputs
-├── voice_profiles/              # Saved voice profiles
-├── models_cache/                # Cached models
-└── datasets/                    # Training datasets
+VoiceCloneAI
+│
+├── Core TTS Engines
+│   ├── Chatterbox (English/Hindi/Hinglish)
+│   └── VibeVoice-Hindi-7B (Native Hindi)
+│
+├── Audio Enhancement Pipeline
+│   ├── Phase 1: Studio Quality
+│   │   ├── Adobe Podcast Enhancer
+│   │   ├── Studio Audio Processor
+│   │   └── Spectral Denoising
+│   │
+│   └── Phase 2: Prosody & Naturalness
+│       ├── Hindi Prosody Enhancer ⭐
+│       ├── Emotion Analyzer
+│       ├── Prosody Processor
+│       └── Audio Post-Processing
+│
+├── Voice Management
+│   ├── Profile System
+│   ├── Embedding Cache
+│   └── Sample Management
+│
+└── Interfaces
+    ├── Gradio Web UI
+    ├── CLI
+    └── Python API
 ```
 
-## 🔧 Configuration
+---
 
-### Hardware Optimization
-The system automatically optimizes for your hardware. For NVIDIA T2000 (4GB VRAM):
-- Enables TF32 for faster operations
-- Uses mixed precision training
-- Implements gradient checkpointing
-- Optimizes batch sizes
+## 🎪 Demo
 
-### Model Paths
-Configure custom model cache locations in `model_paths.py`:
-```python
-CACHE_BASE = "D:/models_cache"  # Change to your preferred location
-```
+### Sample Outputs
 
-## 🎨 Features in Detail
+**English:**
+> "Welcome to VoiceCloneAI, the ultimate voice cloning system with professional-grade audio quality."
 
-### Emotion Control
-- **Excited**: High energy, enthusiastic delivery
-- **Calm**: Peaceful, soothing tone
-- **Dramatic**: Emphasized, theatrical delivery
-- **Conversational**: Natural, casual speaking style
+**Hindi:**
+> "नमस्ते, वॉइस क्लोन एआई में आपका स्वागत है। यह एक उन्नत वॉइस क्लोनिंग सिस्टम है।"
 
-### Audio Enhancement Pipeline
-1. **Noise Reduction**: AI-powered denoising
-2. **Normalization**: Consistent volume levels
-3. **Artifact Removal**: TTS artifact detection and removal
-4. **Studio Processing**: Professional-grade enhancement
-5. **Crossfade Blending**: Smooth transitions for long-form content
+**Hinglish:**
+> "Hello दोस्तों, aaj hum dekhenge ki kaise VoiceCloneAI use करते हैं।"
 
-### Voice Profile System
-Save and manage multiple voice profiles:
-- Automatic embedding generation
-- Metadata tracking
-- Quality reports
-- Sample organization
+---
 
-## 📊 Performance
-
-- **Generation Speed**: ~2-5x real-time (depending on hardware)
-- **Memory Usage**: 4-8GB VRAM for standard models
-- **Audio Quality**: Studio-grade (24-bit, 24kHz default)
-- **Similarity Score**: 85-95% on average
-
-## 🛠️ Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues
 
-**CUDA Out of Memory**
-- Reduce batch size in configuration
-- Use gradient checkpointing
-- Close other GPU applications
+#### GPU Not Detected
+```bash
+# Verify CUDA installation
+python -c "import torch; print(torch.cuda.is_available())"
+python -c "import torch; print(torch.cuda.get_device_name(0))"
+```
 
-**Audio Quality Issues**
-- Use studio audio processing pipeline
-- Ensure clean reference samples
-- Check sample rate consistency
+#### Out of Memory (OOM)
+- Reduce batch size
+- Use CPU mode: `device="cpu"`
+- Enable low VRAM mode in config
 
-**Model Download Failures**
-- Check internet connection
-- Verify cache directory permissions
-- Use manual download from HuggingFace
+#### Hindi Sounds Like "Foreigner"
+The Hindi Prosody Enhancer should fix this! If issues persist:
+```python
+# Increase enhancement intensity
+enhancer.enhance(audio, sr, intensity=1.5)  # Max: 1.5
+```
 
-For detailed troubleshooting, see [COMPLETE_FIX_GUIDE.md](COMPLETE_FIX_GUIDE.md)
+#### Model Download Slow
+```bash
+# Use mirror or manual download
+# Models stored in: models_cache/
+# See VIBEVOICE_INTEGRATION_STATUS.md for details
+```
 
-## 🤝 Contributing
+### Dependency Conflicts
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes:
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Chatterbox and VibeVoice require different transformers versions:
+- **Chatterbox**: transformers==4.46.3 ✅ (Recommended)
+- **VibeVoice**: transformers==4.51.3 ⚠️ (Conflicts)
 
-## 📄 License
+**Solution**: Use separate conda environments (see `VIBEVOICE_INTEGRATION_STATUS.md`)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
 
-## 🙏 Acknowledgments
+## 📊 Performance
 
-This project builds upon several excellent open-source projects:
-- [Chatterbox](https://github.com/resemble-ai/chatterbox) by Resemble AI - State-of-the-art TTS models
-- [F5-TTS](https://github.com/SWivid/F5-TTS) - Advanced text-to-speech system
-- PyTorch, Transformers, and the broader ML community
+### Benchmarks (NVIDIA Quadro T2000, 4GB VRAM)
 
-## 📧 Contact
+| Engine | Language | RTF | Quality | VRAM |
+|--------|----------|-----|---------|------|
+| Chatterbox | English | 20x | Excellent | 2.5GB |
+| Chatterbox | Hindi | 18x | Very Good* | 2.8GB |
+| VibeVoice | Hindi | 12x | Excellent | 3.8GB |
 
-Pritam Ray - [@pritam-ray](https://github.com/pritam-ray)
+*With Hindi Prosody Enhancer applied
 
-Project Link: [https://github.com/pritam-ray/voicecloneai](https://github.com/pritam-ray/voicecloneai)
+**RTF (Real-Time Factor)**: 20x = generates 20 seconds of audio per 1 second of compute time
+
+---
 
 ## 🗺️ Roadmap
 
-- [ ] Real-time streaming TTS
-- [ ] Multi-speaker conversation generation
-- [ ] Fine-tuning interface for custom models
-- [ ] API server for production deployment
-- [ ] Mobile app integration
-- [ ] Additional language support (Spanish, French, German)
-- [ ] Voice style transfer capabilities
-- [ ] Advanced prosody controls
+- [x] Multi-engine support (Chatterbox + VibeVoice)
+- [x] Hindi prosody enhancement
+- [x] Studio-quality audio processing
+- [x] Emotion-aware generation
+- [x] Web UI and CLI
+- [ ] Real-time streaming mode
+- [ ] Voice conversion (voice-to-voice)
+- [ ] Multi-speaker conversations
+- [ ] Fine-tuning on custom datasets
+- [ ] API server with REST endpoints
+- [ ] Mobile app support
+- [ ] Additional language support (Tamil, Telugu, Bengali)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit pull requests.
+
+### Development Setup
+```bash
+git clone https://github.com/Bhomik04/voicecloneai.git
+cd voicecloneai
+pip install -e .
+pip install -r requirements-dev.txt  # Additional dev tools
+```
+
+### Code Style
+- Follow PEP 8
+- Add type hints
+- Document functions with docstrings
+- Run tests before committing
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Third-Party Licenses
+- **Chatterbox TTS**: MIT License
+- **VibeVoice**: Microsoft Research License
+- **Transformers**: Apache 2.0 License
+
+---
+
+## 🙏 Acknowledgments
+
+- **Chatterbox Team** for the excellent TTS engine
+- **Microsoft Research** for VibeVoice-Hindi-7B
+- **Hugging Face** for transformers library
+- **PyTorch Team** for the deep learning framework
+- **Gradio** for the web interface framework
+
+---
+
+## 📧 Contact
+
+- **Author**: Bhomik Pal
+- **GitHub**: [@Bhomik04](https://github.com/Bhomik04)
+- **Repository**: [voicecloneai](https://github.com/Bhomik04/voicecloneai)
+- **Issues**: [Report Bug](https://github.com/Bhomik04/voicecloneai/issues)
+
+---
 
 ## ⭐ Star History
 
@@ -278,4 +480,10 @@ If you find this project useful, please consider giving it a star! ⭐
 
 ---
 
-**Made with ❤️ by [Pritam Ray](https://github.com/pritam-ray)**
+<div align="center">
+
+**Made with ❤️ by [Bhomik04](https://github.com/Bhomik04)**
+
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Bhomik04.voicecloneai)
+
+</div>

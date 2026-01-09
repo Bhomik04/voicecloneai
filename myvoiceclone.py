@@ -122,6 +122,15 @@ except ImportError as e:
     print(f"⚠️ Phase 2 Enhancements not available: {e}")
     print("   Install F5-TTS: pip install f5-tts")
 
+# Import Hindi Prosody Enhancer (fixes "foreigner speaking Hindi" problem)
+try:
+    from hindi_prosody_enhancer import HindiProsodyEnhancer, IndianAccentCorrector
+    HINDI_PROSODY_AVAILABLE = True
+    print("🇮🇳 Hindi Prosody Enhancer: LOADED")
+except ImportError as e:
+    HINDI_PROSODY_AVAILABLE = False
+    print(f"⚠️ Hindi Prosody Enhancer not available: {e}")
+
 
 # ============================================================================
 # CONFIGURATION
@@ -1330,13 +1339,23 @@ class MyVoiceClone:
         This creates natural Hinglish where English words sound like 
         how the speaker naturally says them, not with a foreign accent.
         
-        Your 2 Hindi + 1 English samples train the model to match YOUR accent.
+        OPTIMIZED PARAMETERS FOR NATURAL HINDI PROSODY:
+        - Higher cfg_weight (0.35-0.45) = stronger voice matching
+        - Lower temperature (0.5-0.6) = more consistent pronunciation
+        - Higher exaggeration for Hindi = captures pitch variations
         """
         
         preset = self.config.emotion_presets.get(emotion, self.config.emotion_presets["neutral"])
         
         # Fix English pronunciation (silent h, silent letters)
         text = TextProcessor.fix_english_pronunciation(text)
+        
+        # HINDI-OPTIMIZED PARAMETERS
+        # Hindi speech has more pitch variation and specific prosody patterns
+        # These settings help capture the natural "sing-song" quality
+        hindi_cfg_weight = min(preset["cfg_weight"] * 1.5, 0.45)  # Boost for better voice match
+        hindi_exaggeration = preset["exaggeration"] * 1.2  # More expressive for Hindi prosody
+        hindi_temperature = preset["temperature"] * 0.85  # Lower for consistent pronunciation
         
         # Always use Hindi language ID for Hinglish text
         # The model learns from YOUR voice samples how YOU pronounce English words
@@ -1346,12 +1365,12 @@ class MyVoiceClone:
                 text,
                 language_id="hi",  # Hindi mode - YOUR accent for everything
                 audio_prompt_path=reference_audio_path,
-                exaggeration=preset["exaggeration"],
-                cfg_weight=preset["cfg_weight"],      # High value = match your samples closely
-                temperature=preset["temperature"],    # Low value = consistent output
-                min_p=0.08,                           # Higher = avoid unlikely tokens
-                top_p=0.85,                           # Tighter sampling = more natural
-                repetition_penalty=1.1,               # Low = natural flow, no cutting
+                exaggeration=hindi_exaggeration,      # BOOSTED for Hindi prosody
+                cfg_weight=hindi_cfg_weight,          # BOOSTED for voice matching
+                temperature=hindi_temperature,        # LOWERED for consistency
+                min_p=0.05,                           # Lower = more precise pronunciation
+                top_p=0.90,                           # Slightly higher for natural flow
+                repetition_penalty=1.05,              # Lower = more natural, less robotic
             )
         
         wav = self._sanitize_audio(wav)
@@ -1532,6 +1551,32 @@ class MyVoiceClone:
         except Exception as e:
             if show_progress:
                 print(f"   ⚠️  High-pass filter skipped: {e}")
+        
+        # Apply Hindi prosody enhancement for Hindi/Hinglish content
+        # This fixes the "foreigner speaking Hindi" problem
+        try:
+            if HINDI_PROSODY_AVAILABLE:
+                # Check if any chunk was Hindi/Hinglish
+                has_hindi = any(lang in ['hi', 'hinglish'] for _, lang in chunks)
+                if has_hindi:
+                    if show_progress:
+                        print(f"\n🇮🇳 Applying Hindi prosody enhancement...")
+                    
+                    # Convert to numpy for processing
+                    audio_np = full_audio.squeeze().cpu().numpy()
+                    
+                    # Apply Hindi prosody enhancement
+                    hindi_enhancer = HindiProsodyEnhancer(sample_rate)
+                    audio_np = hindi_enhancer.enhance(audio_np, sample_rate, intensity=1.0)
+                    
+                    # Convert back to torch
+                    full_audio = torch.from_numpy(audio_np).unsqueeze(0).float()
+                    
+                    if show_progress:
+                        print(f"   ✅ Hindi prosody enhancement applied!")
+        except Exception as e:
+            if show_progress:
+                print(f"   ⚠️  Hindi prosody enhancement skipped: {e}")
         
         if show_progress:
             total_duration = full_audio.shape[-1] / sample_rate

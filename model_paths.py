@@ -25,9 +25,13 @@ os.environ['F5TTS_CACHE'] = os.path.join(MODEL_CACHE_ROOT, 'f5tts')
 # Vocos (used by F5-TTS)
 os.environ['VOCOS_CACHE'] = os.path.join(MODEL_CACHE_ROOT, 'vocos')
 
+# VibeVoice Hindi-7B model path
+VIBEVOICE_MODEL_PATH = os.path.join(MODEL_CACHE_ROOT, 'vibevoice-hindi-7b')
+os.environ['VIBEVOICE_MODEL_PATH'] = VIBEVOICE_MODEL_PATH
+
 # Create directories if they don't exist
 for subdir in ['huggingface', 'huggingface/hub', 'huggingface/transformers', 
-               'torch', 'f5tts', 'vocos']:
+               'torch', 'f5tts', 'vocos', 'vibevoice-hindi-7b']:
     path = os.path.join(MODEL_CACHE_ROOT, subdir)
     os.makedirs(path, exist_ok=True)
 
@@ -41,6 +45,7 @@ def get_cache_info():
     print(f"   HF_HOME: {os.environ.get('HF_HOME', 'Not set')}")
     print(f"   TORCH_HOME: {os.environ.get('TORCH_HOME', 'Not set')}")
     print(f"   F5TTS_CACHE: {os.environ.get('F5TTS_CACHE', 'Not set')}")
+    print(f"   VIBEVOICE_MODEL_PATH: {os.environ.get('VIBEVOICE_MODEL_PATH', 'Not set')}")
     
     # Check disk space
     try:
